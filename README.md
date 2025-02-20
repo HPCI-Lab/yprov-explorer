@@ -43,6 +43,4 @@ npm start
 
 
 ## 📸 Screenshot dell'applicazione
-=======
-## 📸 Screenshot dell'applicazione
 
