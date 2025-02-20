@@ -1,0 +1,72 @@
+/* Contenitore generale */
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Bottone rotondo */
+  .upload-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .upload-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .attach-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  /* Sezione di caricamento */
+  .upload-section {
+    position: absolute; /* Floating */
+    top: 50px; /* Adjust position relative to the button */
+    left: 0;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 200; /* Ensures visibility above the header */
+    padding: 10px;
+    width: 300px;
+  }
+  
+  
+  .upload-section h3 {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .file-input,
+  .link-input {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+  }
+  
+  .file-input {
+    cursor: pointer;
+  }
+  
+  .link-input {
+    outline: none;
+  }
+  

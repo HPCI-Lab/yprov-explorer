@@ -1,0 +1,73 @@
+.frame {
+  position: relative; /* Posiziona l'elemento in relazione al suo contenitore */
+  border: 2px solid black; /* Aggiunge un bordo nero spesso 2px */
+  width: 1200px; /* Larghezza fissa della cornice */
+  height: 800px; /* Altezza fissa della cornice */
+  background-color: #101020; /* Sfondo scuro per il contrasto del grafo */
+  transition: all 0.3s ease; /* Aggiunge una transizione fluida per le modifiche */
+  border-radius: 20px; /* Angoli arrotondati della cornice */
+  overflow: visible !important; /* Assicura che gli elementi non vengano ritagliati */
+}
+
+.node-info {
+  flex: 1; /* Permette all'elemento di occupare il 25% dello spazio disponibile */
+  margin-left: 20px; /* Spaziatura a sinistra per separare dal contenitore */
+  background: linear-gradient(to bottom, #ffffff, #f0f0f0); /* Sfondo sfumato dal bianco al grigio chiaro */
+  border: 1px solid #ddd; /* Bordo grigio chiaro */
+  border-radius: 20px; /* Angoli arrotondati */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra per un effetto di profondità */
+  font-family: Arial, sans-serif; /* Stile del testo */
+  height: 100%; /* Occupa tutta l'altezza del contenitore */
+  overflow-y: auto; /* Aggiunge lo scorrimento verticale se il contenuto è troppo lungo */
+  padding: 20px; /* Spaziatura interna uniforme */
+  box-sizing: border-box; /* Include il padding e il bordo nelle dimensioni totali */
+}
+
+.graph-container {
+  position: relative; /* Posiziona l'elemento in relazione al suo contenitore */
+  width: 100%; /* Occupa tutta la larghezza disponibile */
+  max-width: 1200px; /* Imposta una larghezza massima */
+  height: 800px; /* Altezza esplicita per contenere il grafo */
+  overflow: hidden; /* Impedisce al contenuto di fuoriuscire dal contenitore */
+  background-color: #101020; /* Sfondo scuro, coerente con la cornice */
+  border: 1px solid #ccc; /* Bordo grigio chiaro */
+  border-radius: 10px; /* Angoli arrotondati */
+}
+
+svg {
+  width: 100%; /* L'SVG occupa tutta la larghezza del contenitore */
+  height: 100%; /* L'SVG occupa tutta l'altezza del contenitore */
+  display: block; /* Evita spazi vuoti indesiderati sotto l'SVG */
+}
+
+#graphFrame {
+  position: relative; /* Posiziona l'elemento in relazione al suo contenitore */
+  overflow: visible !important; /* Assicura che gli elementi grafici siano visibili */
+  z-index: 0; /* Mantiene l'elemento al livello più basso rispetto agli altri */
+}
+
+.graph-settings-wrapper {
+  position: absolute; /* Posizionamento assoluto all'interno del contenitore */
+  top: 10px; /* Distanza dalla parte superiore del grafo */
+  left: 10px; /* Distanza dal lato sinistro del grafo */
+  z-index: 1000; /* Assicura che l'elemento sia visibile sopra il grafo */
+}
+
+.fullscreen-button-wrapper {
+  position: absolute; /* Posizionamento assoluto all'interno del contenitore */
+  top: 10px; /* Distanza dalla parte superiore del grafo */
+  right: 10px; /* Distanza dal lato destro del grafo */
+  z-index: 1000; /* Assicura che l'elemento sia visibile sopra il grafo */
+}
+
+.graph-canvas {
+  position: relative; /* Posiziona l'elemento rispetto al contenitore */
+  z-index: 1; /* Livello inferiore rispetto ai pulsanti */
+}
+
+.graph-info-wrapper {
+  position: absolute; /* Posizionamento assoluto all'interno del contenitore */
+  bottom: 10px; /* Distanza dalla parte inferiore del grafo */
+  left: 10px; /* Distanza dal lato sinistro del grafo */
+  z-index: 1000; /* Assicura che l'elemento sia visibile sopra il grafo */
+}
