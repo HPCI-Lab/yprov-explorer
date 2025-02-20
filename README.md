@@ -31,7 +31,7 @@ Segui i seguenti passaggi per eseguire la seguente applicazione in locale:
 ```bash
 # Comando per clonare la repository e entrarci da terminale
 git clone https://github.com/Zefkilis2002/yProv-Explorer
-cd https://github.com/Zefkilis2002/yProv-Explorer
+cd /yProv-Explorer
 ```
 - **Installa dipendenze:**
 ```bash
