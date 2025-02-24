@@ -121,7 +121,7 @@ Ora la sezione **Screenshot** è ben organizzata e chiara. Se vuoi aggiungere al
 
 Visita l’applicazione distribuita su Netlify per un’anteprima:
 
-👉 [Demo Online](https://example.com)
+👉 [Demo Online](https://yprovexplorer.netlify.app/)
 
 ---
 
