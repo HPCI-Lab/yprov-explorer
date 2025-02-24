@@ -1,0 +1,65 @@
+/* Container for the settings component */
+.graph-settings-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Settings button with the icon */
+.settings-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.settings-icon {
+  width: 60px;
+  height: 60px;
+}
+
+/* Settings label container */
+.settings-label {
+  position: absolute;
+  top: 65px; /* Move it lower (increase value to move further down) */
+  left: 10px; /* Move it further to the left (negative values go left) */
+  width: 300px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* Individual settings item */
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.settings-item span {
+  font-size: 14px;
+  color: #333;
+}
+
+.settings-item input {
+  cursor: pointer;
+}
+
+/* Ensure the last item has no margin */
+.settings-item:last-child {
+  margin-bottom: 0;
+}
+
+.settings-button.rotated {
+  transform: rotate(35deg); /* Rotate 30 degrees when active */
+}
+
+.separator {
+  border: 0;
+  height: 1px;
+  background: #ddd; /* Colore della linea */
+  margin: 10px 0; /* Distanza sopra e sotto la linea */
+}

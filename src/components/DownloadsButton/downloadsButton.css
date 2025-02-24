@@ -1,0 +1,36 @@
+/* Button styling */
+.download-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Space between icon and text */
+  background: rgb(240, 245, 228); /* Gradient background */
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.533);
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.download-button:hover {
+  background: #f1f1f1;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(2px); /* Slight lift on hover */
+}
+
+/* Download icon */
+.download-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px; 
+}
