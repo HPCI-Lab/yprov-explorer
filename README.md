@@ -1,3 +1,8 @@
+Versione in inglese [qui](README_ENG.md)
+
+---
+
+
 # yProv Explorer
 
 Un potente strumento web basato su **React** e **D3.js** per visualizzare e interagire con grafici di Provenance. Permette di caricare dati da file JSON o URL, e offre funzioni interattive per l’esplorazione di grafici di grandi dimensioni, con diverse opzioni di personalizzazione e condivisione.
@@ -7,24 +12,93 @@ Un potente strumento web basato su **React** e **D3.js** per visualizzare e inte
 ## 📖 Indice
 
 1. [Introduzione](#introduzione)
-2. [Funzionalità Principali](#funzionalità-principali)
-3. [Live Demo](#live-demo)
-4. [Installazione](#installazione)
+2. [Struttura del Progetto](#struttura-del-progetto)
+3. [Screenshot](#screenshot)
+4. [Funzionalità Principali](#funzionalità-principali)
+5. [Live Demo](#live-demo)
+6. [Installazione](#installazione)
    - [Prerequisiti](#prerequisiti)
    - [Steps](#steps)
-5. [Utilizzo](#utilizzo)
+7. [Utilizzo](#utilizzo)
    - [Caricamento Grafici](#caricamento-grafici)
    - [Esplorazione Interattiva](#esplorazione-interattiva)
    - [Condivisione dei Nodi](#condivisione-dei-nodi)
-6. [Struttura del Progetto](#struttura-del-progetto)
-7. [Screenshot](#licenza)
-8. [Sviluppatori](#contatti)
+8. [Sviluppatori](#sviluppatori)
 
 ---
 
 ## Introduzione 🚀
 
 **yProv Explorer** è un’applicazione pensata per fornire una visione immediata e intuitiva della Provenance. Grazie a **React** e **D3.js**, è possibile navigare in modo dinamico e interattivo tra entità, agenti e attività, evidenziando relazioni e collegamenti.
+
+---
+
+## Struttura del Progetto 🏗️
+
+Ecco una panoramica semplificata:
+
+```
+yProv-Explorer/
+├── captures/
+│   ├── example1.jpeg
+│   ├── example2.png
+│   └── example3.jpeg
+├── netlify/
+│   └── functions/
+│       └── proxy.js
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── DownloadsButton/
+│   │   ├── FileUploadButton/
+│   │   ├── FullscreenButton/
+│   │   ├── Graph/
+│   │   ├── GraphContainer/
+│   │   ├── GraphInfo/
+│   │   ├── GraphSettings/
+│   │   ├── JsonLabel/
+│   │   ├── NavigationButton/
+│   │   ├── NodeInfo/
+│   │   ├── SearchBar/
+│   │   └── SearchNode/
+│   ├── main/
+│   │   ├── main.css
+│   │   └── Main.js
+│   ├── App.js
+│   ├── index.css
+│   ├── index.js
+│   ├── proxy-server.mjs
+│   ├── reportWebVitals.js
+│   ├── setupTests.js
+│   └── unified-loader.js
+├── utilities/
+│   └── provenance_creator.py
+├── .gitignore
+├── LICENSE
+├── netlify.toml
+├── package-lock.json
+├── package.json
+├── README_ENG.md
+└── README.md
+```
+
+---
+
+## Screenshot 📸
+
+Ecco un'anteprima del grafo generato dall'applicazione:
+
+![Esempio di Grafico](captures/example1.jpeg)
+
+- I **nodi arancioni** (rettangoli con angoli smussati) rappresentano **le entità**.
+- I **rettangoli verdi** rappresentano **le attività**.
+- Il **nodo a forma di casa viola** rappresenta **un agente**.
+- I **collegamenti rossi** rappresentano **“wasGeneratedBy”**.
+- I **collegamenti verdi** rappresentano **“wasDerivedFrom”**.
+- Il **collegamento arancione** rappresenta **“wasAttributedTo”**.
+
+Ora la sezione **Screenshot** è ben organizzata e chiara. Se vuoi aggiungere altre immagini o ulteriori dettagli, fammelo sapere! 🚀
 
 ---
 
@@ -93,74 +167,6 @@ Vuoi eseguire il progetto in locale? Di seguito i passaggi:
 
 - **URL Dinamico:** Una volta cliccato il nodo, l’URL viene aggiornato con un parametro che identifica il nodo selezionato.
 - **Link Diretto:** Condividi questo URL in modo che chiunque possa accedere direttamente allo stesso nodo.
-
----
-
-## Struttura del Progetto 🏗️
-
-Ecco una panoramica semplificata:
-
-```
-yProv-Explorer/
-├── captures/
-│   ├── example1.jpeg
-│   ├── example2.png
-│   └── example3.jpeg
-├── netlify/
-│   └── functions/
-│       └── proxy.js
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   │   ├── DownloadsButton/
-│   │   ├── FileUploadButton/
-│   │   ├── FullscreenButton/
-│   │   ├── Graph/
-│   │   ├── GraphContainer/
-│   │   ├── GraphInfo/
-│   │   ├── GraphSettings/
-│   │   ├── JsonLabel/
-│   │   ├── NavigationButton/
-│   │   ├── NodeInfo/
-│   │   ├── SearchBar/
-│   │   └── SearchNode/
-│   ├── main/
-│   │   ├── main.css
-│   │   └── Main.js
-│   ├── App.js
-│   ├── index.css
-│   ├── index.js
-│   ├── proxy-server.mjs
-│   ├── reportWebVitals.js
-│   ├── setupTests.js
-│   └── unified-loader.js
-├── utilities/
-│   └── provenance_creator.py
-├── .gitignore
-├── LICENSE
-├── netlify.toml
-├── package-lock.json
-├── package.json
-└── README.md
-```
-
----
-
-## Screenshot 📸
-
-Ecco un'anteprima del grafo generato dall'applicazione:
-
-![Esempio di Grafico](captures/example1.jpeg)
-
-- I **nodi arancioni** (rettangoli con angoli smussati) rappresentano **le entità**.
-- I **rettangoli verdi** rappresentano **le attività**.
-- Il **nodo a forma di casa viola** rappresenta **un agente**.
-- I **collegamenti rossi** rappresentano **“wasGeneratedBy”**.
-- I **collegamenti verdi** rappresentano **“wasDerivedFrom”**.
-- Il **collegamento arancione** rappresenta **“wasAttributedTo”**.
-
-Ora la sezione **Screenshot** è ben organizzata e chiara. Se vuoi aggiungere altre immagini o ulteriori dettagli, fammelo sapere! 🚀
 
 ---
 
