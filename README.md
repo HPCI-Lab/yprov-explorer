@@ -151,7 +151,7 @@ yProv-Explorer/
 
 Ecco un'anteprima del grafo generato dall'applicazione:
 
-![Esempio di Grafico](captures/example1.png)
+![Esempio di Grafico](captures/example1.jpeg)
 
 - I **nodi arancioni** (rettangoli con angoli smussati) rappresentano **le entità**.
 - I **rettangoli verdi** rappresentano **le attività**.
