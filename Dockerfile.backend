@@ -8,7 +8,7 @@ RUN npm install
 # Copia tutto il codice sorgente (in particolare la cartella src contenente proxy-server.mjs)
 COPY . .
 
-# Espone la porta usata dal server proxy (il tuo proxy-server.mjs imposta la porta a 3001 di default)
+# Espone la porta usata dal server proxy
 EXPOSE 3001
 
 # Avvia il server proxy
