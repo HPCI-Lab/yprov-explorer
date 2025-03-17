@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copia tutto il codice sorgente (in particolare la cartella src contenente proxy-server.mjs)
+# Copia tutto il codice sorgente
 COPY . .
 
 # Espone la porta usata dal server proxy
