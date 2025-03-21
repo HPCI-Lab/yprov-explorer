@@ -1,0 +1,15 @@
+FROM node:18-alpine
+WORKDIR /app
+
+# Copia i file di configurazione e installa le dipendenze
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copia tutto il codice sorgente
+COPY . .
+
+# Espone la porta usata dal server proxy
+EXPOSE 3001
+
+# Avvia il server proxy
+CMD ["node", "src/proxy-server.mjs"]

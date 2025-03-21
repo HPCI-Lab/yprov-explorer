@@ -1,0 +1,24 @@
+# Stage 1: Build dell'app React
+FROM node:18-alpine AS builder
+WORKDIR /app
+
+# Copia i file di dipendenze e installa i pacchetti
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copia tutto il codice sorgente (include src/, public/ e build/ se presente)
+COPY . .
+
+# Esegui la build in modalità produzione
+RUN npm run build
+
+# Stage 2: Server Nginx per servire l'applicazione
+FROM nginx:alpine
+# Copia la build generata nel folder di default di Nginx
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Espone la porta 80 (la porta di default di Nginx)
+EXPOSE 80
+
+# Avvia Nginx in modalità foreground
+CMD ["nginx", "-g", "daemon off;"]
