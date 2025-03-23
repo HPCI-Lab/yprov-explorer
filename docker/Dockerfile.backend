@@ -12,4 +12,6 @@ COPY . .
 EXPOSE 3001
 
 # Avvia il server proxy
-CMD ["node", "src/proxy-server.mjs"]
+CMD ["node", "src/server/proxy-server.mjs"]
+
+

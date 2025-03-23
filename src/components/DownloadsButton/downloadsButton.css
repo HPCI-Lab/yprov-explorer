@@ -1,10 +1,12 @@
-/* Button styling */
+/* This CSS file is for the DownloadsButton component */
+
+/* Buttons styling */
 .download-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px; /* Space between icon and text */
-  background: rgb(240, 245, 228); /* Gradient background */
+  gap: 8px;
+  background: rgb(240, 245, 228);
   color: rgb(0, 0, 0);
   font-size: 16px;
   border: 1px solid rgba(0, 0, 0, 0.533);
@@ -17,20 +19,21 @@
   transition: all 0.3s ease;
 }
 
-/* Hover effect for buttons */
+/* Hover effect */
 .download-button:hover {
   background: #f1f1f1;
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
-  transform: translateY(2px); /* Slight lift on hover */
+  transform: translateY(2px)
 }
 
-/* Download icon */
+/* Icon styling */
 .download-icon {
   width: 20px;
   height: 20px;
 }
 
+/* Button container styling */
 .button-container {
   display: flex;
-  gap: 10px; 
+  gap: 10px;
 }

@@ -34,7 +34,7 @@
   "scripts": {
     "start": "concurrently \"npm run client\" \"npm run server\"",
     "client": "react-scripts start",
-    "server": "node src/proxy-server.mjs",
+    "server": "node src/server/proxy-server.mjs",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

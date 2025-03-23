@@ -1,49 +1,54 @@
+/*
+FullscreenButton.js: Component that enables or disables 
+the fullscreen mode for the graph.
+*/
+
 import React, { useState } from "react";
 import "./fullscreenButton.css";
 import fullscreenMax from "../../assets/images/fullscreen-max.png";
 import fullscreenMin from "../../assets/images/fullscreen-min.png";
 
 const FullscreenButton = () => {
-  // Stato per tenere traccia se siamo in modalità fullscreen o no
+  // State for the fullscreen mode (true if active, false otherwise)
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Funzione per attivare/disattivare la modalità fullscreen
+  // Function to toggle the fullscreen mode
   const toggleFullscreen = () => {
-    console.log("FullscreenButton rendered"); // Debug: verifica il rendering
-    const frame = document.getElementById("graphFrame"); // Seleziona il contenitore del grafo
+    console.log("FullscreenButton rendered"); 
+    const frame = document.getElementById("graphFrame");
 
     if (!isFullscreen) {
-      // Entra in modalità fullscreen
+      // Enter fullscreen mode
       if (frame.requestFullscreen) {
-        frame.requestFullscreen(); // Standard moderno
+        frame.requestFullscreen();
       } else if (frame.webkitRequestFullscreen) {
-        frame.webkitRequestFullscreen(); // Supporto per Safari
+        frame.webkitRequestFullscreen(); 
       } else if (frame.msRequestFullscreen) {
-        frame.msRequestFullscreen(); // Supporto per IE/Edge
+        frame.msRequestFullscreen();
       }
     } else {
-      // Esci dalla modalità fullscreen
+      // Exit fullscreen mode
       if (document.exitFullscreen) {
-        document.exitFullscreen(); // Standard moderno
+        document.exitFullscreen(); 
       } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen(); // Supporto per Safari
+        document.webkitExitFullscreen(); 
       } else if (document.msExitFullscreen) {
-        document.msExitFullscreen(); // Supporto per IE/Edge
+        document.msExitFullscreen();
       }
     }
-
-    setIsFullscreen(!isFullscreen); // Aggiorna lo stato per riflettere il cambio
+    // Update the state of the fullscreen
+    setIsFullscreen(!isFullscreen);
   };
 
   return (
     <button
-      className="fullscreen-btn" // Classe per il bottone, per styling personalizzato
-      onClick={toggleFullscreen} // Aggiunge il comportamento al click
+      className="fullscreen-btn" 
+      onClick={toggleFullscreen} 
       style={{
-        backgroundImage: `url(${isFullscreen ? fullscreenMin : fullscreenMax})`, // Cambia l'icona in base allo stato
-        backgroundRepeat: "no-repeat", // Evita la ripetizione dell'immagine
-        backgroundPosition: "center", // Posiziona l'immagine al centro
-        backgroundSize: "contain", // Adatta l'immagine al contenitore
+        backgroundImage: `url(${isFullscreen ? fullscreenMin : fullscreenMax})`, 
+        backgroundRepeat: "no-repeat", 
+        backgroundPosition: "center", 
+        backgroundSize: "contain",
       }}
     />
   );

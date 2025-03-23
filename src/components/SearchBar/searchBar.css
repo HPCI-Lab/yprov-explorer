@@ -6,7 +6,7 @@
   border: 1px solid #989898;
   border-radius: 20px;
   overflow: hidden;
-  background-color: #F4F2F2;
+  background-color: #f4f2f2;
   margin-bottom: 10px;
 }
 
@@ -29,7 +29,7 @@
   width: 35px;
   height: 35px;
   margin-right: 5px;
-  border-radius: 50%; 
+  border-radius: 50%;
   cursor: pointer;
   padding: 0;
 }
@@ -39,9 +39,7 @@
 }
 
 .search-icon {
-  width: 110%; 
+  width: 110%;
   height: 111%;
-  object-fit: contain; 
+  object-fit: contain;
 }
-
-

@@ -20,7 +20,7 @@
 /* Info label styling */
 .info-label {
   position: absolute;
-  bottom: 70px; 
+  bottom: 70px;
   right: -105px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -29,6 +29,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   font-size: 14px;
   line-height: 1.5;
-  z-index: 1000; 
+  z-index: 1000;
   white-space: nowrap;
 }

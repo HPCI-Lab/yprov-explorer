@@ -1,10 +1,8 @@
-/* Container for the settings component */
 .graph-settings-container {
   position: relative;
   display: inline-block;
 }
 
-/* Settings button with the icon */
 .settings-button {
   background: none;
   border: none;
@@ -17,11 +15,10 @@
   height: 60px;
 }
 
-/* Settings label container */
 .settings-label {
   position: absolute;
-  top: 65px; /* Move it lower (increase value to move further down) */
-  left: 10px; /* Move it further to the left (negative values go left) */
+  top: 65px;
+  left: 10px;
   width: 300px;
   padding: 10px;
   background-color: #fff;
@@ -31,7 +28,6 @@
   z-index: 1000;
 }
 
-/* Individual settings item */
 .settings-item {
   display: flex;
   justify-content: space-between;
@@ -48,18 +44,17 @@
   cursor: pointer;
 }
 
-/* Ensure the last item has no margin */
 .settings-item:last-child {
   margin-bottom: 0;
 }
 
 .settings-button.rotated {
-  transform: rotate(35deg); /* Rotate 30 degrees when active */
+  transform: rotate(35deg);
 }
 
 .separator {
   border: 0;
   height: 1px;
-  background: #ddd; /* Colore della linea */
-  margin: 10px 0; /* Distanza sopra e sotto la linea */
+  background: #ddd;
+  margin: 10px 0;
 }

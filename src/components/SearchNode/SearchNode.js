@@ -1,52 +1,52 @@
 // SearchNode.js
 /*
-Questo file consente di cercare un nodo all'interno del grafo. Include un campo di input per inserire il nome del nodo da cercare
-e un pulsante di ricerca per avviare la ricerca. Mostra anche le corrispondenze possibili mentre l'utente digita il nome del nodo.
+SearchNode.js: This component allows you to search for a node within the graph. It includes an input field to enter the name of the node to be searched
+and a search button to start the search. It also shows possible matches as the user enters the name of the node.
 */
 
-import React, { useState } from 'react';
-import './searchNode.css';
-import searchIcon from './search.png';
+import React, { useState } from "react";
+import "./searchNode.css";
+import searchIcon from "./search.png";
 
 /*
- - placeholder: testo visualizzato all'interno del campo di input
- - onSearch: funzione di callback chiamata quando si preme il pulsante di ricerca o si preme invio
- - nodes: array di nodi da cui cercare i corrispondenti
+ - placeholder: text displayed within the input field
+ - onSearch: callback function call when you press the search button or press enter
+ - nodes: array of nodes from which to search for matching
 */
 const SearchNode = ({ placeholder, onSearch, nodes }) => {
-  const [searchTerm, setSearchTerm] = useState(''); // Stato per memorizzare il termine di ricerca
-  const [suggestions, setSuggestions] = useState([]); // Stato per memorizzare le corrispondenze possibili (suggerimenti)
+  const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
+  const [suggestions, setSuggestions] = useState([]); // State to store the search suggestions
 
-  // Funzione per gestire la ricerca
+  // Function to handle search
   const handleSearch = () => {
     if (onSearch) {
-      onSearch(searchTerm); // Chiamare la funzione di callback con il termine di ricerca
-      setSuggestions([]); // Nascondere i suggerimenti perché la ricerca è stata avviata
+      onSearch(searchTerm); // Call the onSearch callback function with the search term
+      setSuggestions([]); // Hide the suggestions after search
     }
   };
 
-  // Funzione per gestire il cambiamento dell'input
+  // Function to handle input change
   const handleInputChange = (e) => {
-    const value = e.target.value; // Ottenere il valore dell'input
-    setSearchTerm(value); // Aggiornare il termine di ricerca
+    const value = e.target.value; // Get the value from the input field
+    setSearchTerm(value); // Update the search term state with the input value
 
-    // Se il valore è vuoto, nascondere i suggerimenti
-    if (value.trim() === '') {
+    // Filter the nodes based on the search term
+    if (value.trim() === "") {
       setSuggestions([]);
     } else {
       const filtered = nodes.filter((node) => {
-        // Filtrare i nodi in base al termine di ricerca
-        const nodeId = node?.id?.toString() || '';
+        // Check if the node id includes the search term
+        const nodeId = node?.id?.toString() || "";
         return nodeId.toLowerCase().includes(value.toLowerCase());
       });
       setSuggestions(filtered);
     }
   };
 
-  // Funzione per gestire il clic su un suggerimento
+  // Function to handle suggestion click
   const handleSuggestionClick = (nodeId) => {
-    setSearchTerm(nodeId); // Impostare il termine di ricerca sul nodo selezionato
-    setSuggestions([]); // Nascondere i suggerimenti
+    setSearchTerm(nodeId); // Update the search term with the clicked suggestion
+    setSuggestions([]); // Hide the suggestions
     if (onSearch) onSearch(nodeId);
   };
 
@@ -56,10 +56,10 @@ const SearchNode = ({ placeholder, onSearch, nodes }) => {
         <input
           type="text"
           className="search-input"
-          placeholder={placeholder || 'Search any node on the graph'}
+          placeholder={placeholder || "Search any node on the graph"}
           value={searchTerm}
-          onChange={handleInputChange} // Aggiorna il valore del termine di ricerca a ogni modifica dell'input
-          onKeyDown={(e) => e.key === 'Enter' && handleSearch()} // Avvia la ricerca quando l'utente preme il tasto Invio
+          onChange={handleInputChange} // Update the search term on input change
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()} // Call handleSearch on Enter key press
         />
         <button className="search-button" onClick={handleSearch}>
           <img src={searchIcon} alt="Search Icon" className="search-icon" />
@@ -67,13 +67,13 @@ const SearchNode = ({ placeholder, onSearch, nodes }) => {
       </div>
 
       {/* Suggestions */}
-      {suggestions.length > 0 && ( // Mostra i suggerimenti solo se ci sono risultati corrispondenti
+      {suggestions.length > 0 && ( // Show suggestions only if there are any
         <div className="suggestions-container">
           {suggestions.map((node) => (
             <div
-              key={node.id} // Chiave unica per ogni elemento suggerito
+              key={node.id} // Key for the suggestion item
               className="suggestion-item"
-              onClick={() => handleSuggestionClick(node.id)} // Gestire il clic su un suggerimento
+              onClick={() => handleSuggestionClick(node.id)} // Call handleSuggestionClick on suggestion click
             >
               {node.id}
             </div>
@@ -84,32 +84,37 @@ const SearchNode = ({ placeholder, onSearch, nodes }) => {
   );
 };
 
-// Funzione per configurare SearchNode con i dati e le funzionalità personalizzate
-export const configureSearchNode = ({ graphData, setHighlightedNode, setSelectedNode, findNodeDetails }) => {
+// Function to configure the search node component
+export const configureSearchNode = ({
+  graphData,
+  setHighlightedNode,
+  setSelectedNode,
+  findNodeDetails,
+}) => {
   const nodes = [
     ...Object.keys(graphData?.entity || {}).map((key) => ({
       id: key,
-      group: 'entity',
+      group: "entity",
     })),
     ...Object.keys(graphData?.activity || {}).map((key) => ({
       id: key,
-      group: 'activity',
+      group: "activity",
     })),
     ...Object.keys(graphData?.agent || {}).map((key) => ({
       id: key,
-      group: 'agent',
+      group: "agent",
     })),
   ];
 
   return (
     <SearchNode
-      placeholder="Search any node on the graph" // Placeholder per l'input di ricerca
+      placeholder="Search any node on the graph" // Placeholder text for the search input field
       onSearch={(nodeId) => {
-        // Aggiorna URL
-        window.history.pushState(null, '', `#${nodeId}`);
-        // Evidenzia e zooma sul nodo
+        // Update the URL with the node id
+        window.history.pushState(null, "", `#${nodeId}`);
+        // Highlight the node on the graph
         setHighlightedNode(nodeId);
-        // Aggiorna i dettagli del nodo selezionato
+        // Find the node details
         const nodeDetails = findNodeDetails(nodeId, graphData);
         if (nodeDetails) setSelectedNode(nodeDetails);
       }}

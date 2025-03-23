@@ -1,35 +1,35 @@
 // JsonLabel.js
 /*
-Questo file consente agli utenti di caricare e visualizzare un file JSON. Utilizza stati interni per gestire il nome del file 
-caricato, il contenuto JSON e la visibilità di una finestra di caricamento. L'utente può selezionare un file JSON tramite un 
-pulsante di upload, che legge e analizza il contenuto del file, aggiornando lo stato e passando i dati al componente genitore 
-tramite setGraphData. Il contenuto JSON viene mostrato in un formato leggibile all'interno di una finestra scorrevole, con ogni 
-riga visualizzata separatamente. Se non è stato caricato alcun file, mostra un messaggio predefinito.
+JsonLabel.js: This component allows users to load and view a JSON file. It uses internal states to manage the name of the file 
+loaded, the JSON content and the visibility of a loading window. The user can select a JSON file via a 
+upload button, which reads and analyzes the file content, updating the status and passing data to the parent component 
+via setGraphData. The JSON content is displayed in a readable format within a sliding window, with each 
+Line displayed separately. If no file was uploaded, a default message is shown.
 */
 
 import React, { useState, useEffect} from "react";
 import "./jsonLabel.css";
 import FileUploadButton from "../FileUploadButton/FileUploadButton";
-import { unifiedFileLoader } from '../../unified-loader';
+import { unifiedFileLoader } from '../../server/unified-loader';
 
 /*
- - setGraphData: funzione per passare i dati JSON al componente Graph.js per la visualizzazione del grafo
+ - setGraphData: Function to set the graph data in the parent component
 */
 const JsonLabel = ({ setGraphData }) => {
-  const [fileName, setFileName] = useState(null); // Stato per il nome del file caricato
-  const [jsonContent, setJsonContent] = useState(null); // Stato per il contenuto JSON del file caricato
-  const [showUploadBox, setShowUploadBox] = useState(false); // Stato per la visibilità della finestra di caricamento
+  const [fileName, setFileName] = useState(null); // State to store the name of the uploaded file
+  const [jsonContent, setJsonContent] = useState(null); // State to store the JSON content
+  const [showUploadBox, setShowUploadBox] = useState(false); // State to manage the visibility of the upload window
 
   const getQueryParam = (param) => {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
   };
 
-  // Funzione per gestire il caricamento del file JSON
+  // Function to handle the file upload and update the states accordingly
   const handleFileUpload = (name, content) => {
     let parsedContent = content;
 
-    // Verifica se esiste la proprietà "result" e se è una stringa
+    // Check if the content has a 'result' field and parse it if it's a string
     if (content.result && typeof content.result === "string") {
       try {
         parsedContent = JSON.parse(content.result);
@@ -39,57 +39,57 @@ const JsonLabel = ({ setGraphData }) => {
         return;
       }
     }
-    setFileName(name); // Salva il nome del file caricato nello stato
-    setJsonContent(content); // Salva il contenuto JSON originale nello stato
-    setShowUploadBox(false); // Nasconde la finestra di caricamento    
-    setJsonContent(JSON.stringify(content, null, 2).split("\n")); // Formatta il JSON con indentazione e lo divide in righe
-    setGraphData(content); // Passa il contenuto JSON al componente genitore tramite setGraphData
-    const encodedUrl = encodeURIComponent(name); // Codifica l'URL del file
-    window.history.replaceState(null, "", `?file=${encodedUrl}`); // Aggiorna l'URL
+    setFileName(name); // Save the file name in the state
+    setJsonContent(content); // Save the JSON content in the state
+    setShowUploadBox(false); // Hide the upload window  
+    setJsonContent(JSON.stringify(content, null, 2).split("\n")); // Format the JSON content and split it by line 
+    setGraphData(content); // Update the graph data in the parent component 
+    const encodedUrl = encodeURIComponent(name); // Encode the file name to handle special characters
+    window.history.replaceState(null, "", `?file=${encodedUrl}`); // Update the URL with the file name
   };
 
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {
-      return `${text.substring(0, maxLength)}...`; // Trunca il testo e aggiunge "..."
+      return `${text.substring(0, maxLength)}...`; // Truncate the text if it's longer than the max length
     }
     return text;
   };
 
-  // Carica il contenuto del file JSON all'avvio
+  // Load the JSON content from the URL parameter when the component is mounted 
   useEffect(() => {
     const loadContent = async () => {
       const fileUrl = getQueryParam("file");
       if (!fileUrl) return;
   
       try {
-        // Decodifica l'URL per gestire caratteri speciali
+        // Decode the URL to handle special characters
         const decodedUrl = decodeURIComponent(fileUrl);
         
-        // Verifica se è un URL completo o un nome file
+        // Check if the URL is a full URL
         const isFullUrl = decodedUrl.startsWith('http://') || decodedUrl.startsWith('https://');
         
         let result;
         if (isFullUrl) {
-          // Per URL completi, passa l'URL decodificato direttamente
+          // For full URLs/API, pass the decoded
           result = await unifiedFileLoader(decodedUrl);
         } else {
-          // Per file locali/API, passa l'URL come ricevuto
+          // For relative URLs, pass the original URL
           result = await unifiedFileLoader(fileUrl);
         }
   
-        // Verifica che result.data esista
+        // Check if the result is valid
         if (!result || !result.data) {
           throw new Error('Invalid data format received');
         }
   
-        // Aggiorna il nome del file
+        // Set the file name
         setFileName(decodedUrl);
         
-        // Formatta e imposta il contenuto JSON
+        // Format the JSON content and split it by line
         const formattedContent = JSON.stringify(result.data, null, 2).split("\n");
         setJsonContent(formattedContent);
         
-        // Aggiorna i dati del grafo
+        // Update the graph data in the parent component
         setGraphData(result.data);
         
       } catch (error) {
@@ -105,54 +105,50 @@ const JsonLabel = ({ setGraphData }) => {
   
   return (
     <div className="json-label-container">
-      {/* Intestazione con il nome del file e pulsante di upload */}
       <div className="json-label-header">
       <span>
         <strong>My File:</strong> {fileName ? truncateText(fileName, 30) : "Nessun file caricato"}
       </span>
 
         <div className="upload-button-container">
-        <FileUploadButton onFileUpload={(fileNameOrUrl, content) => handleFileUpload(fileNameOrUrl, content)} /> {/* Componente per gestire il caricamento del file */}
+        <FileUploadButton onFileUpload={(fileNameOrUrl, content) => handleFileUpload(fileNameOrUrl, content)} />
         </div>
       </div>
 
-      {/* Finestra di overlay per il caricamento del file JSON */}
       {showUploadBox && (
         <div className="upload-overlay">
           <div className="upload-box">
             <h3>Upload a JSON file</h3>
-            {/* Input per selezionare un file JSON */}
             <input
               type="file"
-              accept=".json" // Accetta solo file JSON
+              accept=".json"
               onChange={(e) => {
-                const file = e.target.files[0]; // Recupera il primo file selezionato
-                if (file && file.type === "application/json") { // Verifica che sia un file JSON valido
-                  const reader = new FileReader(); // Crea un oggetto FileReader
+                const file = e.target.files[0]; 
+                if (file && file.type === "application/json") { 
+                  const reader = new FileReader();
                   reader.onload = (event) => {
                     try {
-                      const content = JSON.parse(event.target.result); // Effettua il parsing del JSON
-                      handleFileUpload(file.name, content); // Aggiorna lo stato con nome e contenuto del file
+                      const content = JSON.parse(event.target.result); 
+                      handleFileUpload(file.name, content); 
                     } catch (error) {
-                      console.error("Errore nel parsing del file JSON", error); // Logga errori di parsing
+                      console.error("Errore nel parsing del file JSON", error); 
                     }
                   };
-                  reader.readAsText(file); // Legge il contenuto del file come testo
+                  reader.readAsText(file);
                 }
               }}
             />
-            <button onClick={() => setShowUploadBox(false)}>Chiudi</button> {/* Pulsante per chiudere la finestra di caricamento */}
+            <button onClick={() => setShowUploadBox(false)}>Chiudi</button>
           </div>
         </div>
       )}
 
-      {/* Contenitore per visualizzare il contenuto JSON */}
       <div
         className="json-content-container"
         dangerouslySetInnerHTML={{
           __html: jsonContent
-            ? jsonContent.map((line) => `<pre>${line}</pre>`).join("") // Mostra il JSON formattato riga per riga
-            : "Carica un file JSON per visualizzarlo qui.", // Messaggio predefinito se nessun file è caricato
+            ? jsonContent.map((line) => `<pre>${line}</pre>`).join("") 
+            : "Carica un file JSON per visualizzarlo qui.",
         }}
       ></div>
     </div>
