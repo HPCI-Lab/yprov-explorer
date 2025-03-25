@@ -202,10 +202,29 @@ const Graph = ({ showUsedLinks, showWasDerivedFromLinks, showWasGeneratedByLinks
 
       // Creazione dei collegamenti tra i nodi
       const links = [
+        /**
+         * The wasDerivedFrom relationship can be splitted into three: wasDerivedFrom, wasGeneratedBy and used
+         * "wasDerivedFrom": {
+         *  "": {
+         *    "prov:generatedEntity": "",
+         *    "prov:usedEntity": "",
+         *    "prov:activity": ""
+         * },
+         */
         ...Object.values(graphData.wasDerivedFrom || {}).map((rel) => ({
           source: nodeMap.get(rel["prov:usedEntity"]),
           target: nodeMap.get(rel["prov:generatedEntity"]),
           type: "wasDerivedFrom",
+        })),
+        ...Object.values(graphData.wasDerivedFrom || {}).map((rel) => ({
+          source: nodeMap.get(rel["prov:activity"]),
+          target: nodeMap.get(rel["prov:generatedEntity"]),
+          type: "wasGeneratedBy",
+        })),
+        ...Object.values(graphData.wasDerivedFrom || {}).map((rel) => ({
+          source: nodeMap.get(rel["prov:activity"]),
+          target: nodeMap.get(rel["prov:usedEntity"]),
+          type: "used",
         })),
         ...Object.values(graphData.wasGeneratedBy || {}).map((rel) => ({
           source: nodeMap.get(rel["prov:activity"]),
