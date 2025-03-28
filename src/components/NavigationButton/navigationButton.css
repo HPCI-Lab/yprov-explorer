@@ -1,6 +1,6 @@
 .navigation-container {
   display: flex;
-  gap: 20px; /* Spazio tra i due pulsanti */
+  gap: 20px;
   justify-content: center;
   align-items: center;
 }
@@ -12,8 +12,8 @@
   background-color: #f8f7f7;
   border: 1px solid #9898;
   border-radius: 40px;
-  width: 100px; /* Larghezza fissa per i pulsanti */
-  height: 35px; /* Altezza fissa */
+  width: 100px;
+  height: 35px;
   padding: 5px 15px;
   font-size: 14px;
   font-weight: bold;
@@ -26,14 +26,12 @@
   background-color: #e0e0e0;
 }
 
-/* Ridimensiona solo l'icona */
 .nav-icon {
-  max-width: 35px; /* Larghezza massima dell'icona */
-  max-height: 35px; /* Altezza massima dell'icona */
-  object-fit: contain; /* Mantiene le proporzioni */
+  max-width: 35px;
+  max-height: 35px;
+  object-fit: contain;
 }
 
-/* Per gestire margini delle icone */
 .navigation-button.back .nav-icon {
   margin-right: 5px;
 }
@@ -46,20 +44,18 @@
   margin: 0 5px;
 }
 
-/* Effetto hover per il pulsante Back: sposta l'icona a sinistra */
 .navigation-button.back:hover .nav-icon {
-  transform: translateX(-3px); /* Sposta l'icona di 5px a sinistra */
+  transform: translateX(-3px);
   transition: transform 0.3s ease;
 }
 
-/* Effetto hover per il pulsante Next: sposta l'icona a destra */
 .navigation-button.next:hover .nav-icon {
-  transform: translateX(3px); /* Sposta l'icona di 5px a destra */
+  transform: translateX(3px);
   transition: transform 0.3s ease;
 }
 
 .navigation-button:disabled {
   background-color: #f5f5f5;
   cursor: not-allowed;
-  opacity: 0.6; /* Make it visually distinct */
+  opacity: 0.6;
 }

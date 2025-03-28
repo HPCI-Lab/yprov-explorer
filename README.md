@@ -175,3 +175,96 @@ Vuoi eseguire il progetto in locale? Di seguito i passaggi:
  - Sandro Luigi Fiore;
  - Marco Robol.
 
+
+
+
+```
+yprov-explorer
+├─ .dockerignore
+├─ captures
+│  ├─ example1.jpeg
+│  ├─ example2.png
+│  └─ example3.jpeg
+├─ docker
+│  ├─ Dockerfile.backend
+│  └─ Dockerfile.frontend
+├─ docker-compose.yml
+├─ gnu-gpl-v3.0.md
+├─ LICENSE
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ favicon.ico
+│  ├─ index.html
+│  ├─ logo192.png
+│  ├─ logo512.png
+│  ├─ manifest.json
+│  └─ robots.txt
+├─ README.md
+├─ README_ENG.md
+├─ src
+│  ├─ App.js
+│  ├─ assets
+│  │  └─ images
+│  │     ├─ fullscreen-max.png
+│  │     ├─ fullscreen-min.png
+│  │     └─ leftArrow.png
+│  ├─ components
+│  │  ├─ DownloadsButton
+│  │  │  ├─ download.png
+│  │  │  ├─ downloadsButton.css
+│  │  │  └─ DownloadsButton.js
+│  │  ├─ FileUploadButton
+│  │  │  ├─ Attach.png
+│  │  │  ├─ fileUploadButton.css
+│  │  │  └─ FileUploadButton.js
+│  │  ├─ FullscreenButton
+│  │  │  ├─ fullscreenButton.css
+│  │  │  └─ FullscreenButton.js
+│  │  ├─ Graph
+│  │  │  ├─ graph.css
+│  │  │  └─ Graph.js
+│  │  ├─ GraphContainer
+│  │  │  ├─ graphContainer.css
+│  │  │  └─ GraphContainer.js
+│  │  ├─ GraphInfo
+│  │  │  ├─ graphInfo.css
+│  │  │  ├─ GraphInfo.js
+│  │  │  └─ info.png
+│  │  ├─ GraphSettings
+│  │  │  ├─ graphSettings.css
+│  │  │  ├─ GraphSettings.js
+│  │  │  └─ Settings.png
+│  │  ├─ JsonLabel
+│  │  │  ├─ jsonLabel.css
+│  │  │  └─ JsonLabel.js
+│  │  ├─ NavigationButton
+│  │  │  ├─ Back Arrow.png
+│  │  │  ├─ Forward Arrow.png
+│  │  │  ├─ navigationButton.css
+│  │  │  └─ NavigationButton.js
+│  │  ├─ NodeInfo
+│  │  │  ├─ nodeInfo.css
+│  │  │  └─ NodeInfo.js
+│  │  ├─ SearchBar
+│  │  │  ├─ search.png
+│  │  │  ├─ searchBar.css
+│  │  │  └─ SearchBar.js
+│  │  └─ SearchNode
+│  │     ├─ search.png
+│  │     ├─ searchNode.css
+│  │     └─ SearchNode.js
+│  ├─ index.css
+│  ├─ index.js
+│  ├─ main
+│  │  ├─ main.css
+│  │  └─ Main.js
+│  ├─ reportWebVitals.js
+│  ├─ server
+│  │  ├─ proxy-server.mjs
+│  │  └─ unified-loader.js
+│  └─ setupTests.js
+└─ utilities
+   └─ provenance_creator.py
+
+```

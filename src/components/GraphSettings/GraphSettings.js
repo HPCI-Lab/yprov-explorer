@@ -1,3 +1,11 @@
+/*
+GraphSettings.js: This component, GraphSettings, allows the user to customize the graph view,
+offering options to show or hide specific types of links and nodes. It also allows you to
+Modify parameters related to the physical forces of the graph (distance, repulsion, collision and alpha decay).
+Each change made updates the graph status in real time, adapting to the user’s preferences.
+It is particularly useful in scenarios where a high level of layout configurability is required.
+*/
+
 import React, { useState } from "react";
 import "./graphSettings.css";
 import settingsIcon from "./Settings.png";

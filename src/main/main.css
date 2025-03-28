@@ -26,17 +26,17 @@ h3 {
   zoom: 80%;
 }
 
-.high-row{
-  margin-bottom: 15px; 
-  align-items: center; 
-  display: flex; 
+.high-row {
+  margin-bottom: 15px;
+  align-items: center;
+  display: flex;
   justify-content: center;
 }
 
-.low-row{
-  margin-top: 15px; 
-  align-items: center; 
-  display: flex; 
+.low-row {
+  margin-top: 15px;
+  align-items: center;
+  display: flex;
   justify-content: center;
 }
 

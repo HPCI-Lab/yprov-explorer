@@ -9,21 +9,21 @@ svg {
   overflow: visible;
 }
 
-.node-label, .link-label {
-  pointer-events: none; /* Evita che il mouse interferisca */
+.node-label,
+.link-label {
+  pointer-events: none;
 }
 
 .node-label {
   font-size: 14px;
   font-weight: bold;
-  fill: white; /* Colore del testo */
-  text-shadow: 1px 1px 2px black; /* Migliora la leggibilità */
+  fill: white;
+  text-shadow: 1px 1px 2px black;
 }
 
 .link-label {
   font-size: 12px;
   font-weight: bold;
-  fill: white; /* Colore del testo */
-  text-shadow: 1px 1px 2px black; /* Migliora la leggibilità */
+  fill: white;
+  text-shadow: 1px 1px 2px black;
 }
-

@@ -1,18 +1,20 @@
+/*
+SearchBar.js: Component for a search bar with a search button to search words in the NodeInfo label.
+*/
+
 import React, { useState } from "react";
-import './searchBar.css';
-import searchIcon from './search.png';
+import "./searchBar.css";
+import searchIcon from "./search.png";
 
-
-// Funzione per evidenziare i match della query all'interno del contenuto
+// Function to highlight the matches of the query in the content
 export const highlightMatches = (content, query) => {
   if (!query) return content;
   const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  // Crea una regex per trovare tutte le occorrenze ignorando maiuscole/minuscole
+  // Create a regular expression with the query and the global and case-insensitive flags
   const regex = new RegExp(`(${escapedQuery})`, "gi");
-  // Evidenzia i match della query con il tag <mark>
+  // Replace the matches with the query highlighted
   return content.replace(regex, "<mark>$1</mark>");
 };
-
 
 const SearchBar = ({ placeholder, onSearch }) => {
   const [query, setQuery] = useState("");
@@ -25,11 +27,13 @@ const SearchBar = ({ placeholder, onSearch }) => {
 
   return (
     <div className="search-bar">
-      <input 
-        type="text" 
-        className="search-input" 
-        placeholder={placeholder || "Search Information"} 
-        onKeyDown={(e) => e.key === 'Enter' && onSearch && onSearch(e.target.value)}
+      <input
+        type="text"
+        className="search-input"
+        placeholder={placeholder || "Search Information"}
+        onKeyDown={(e) =>
+          e.key === "Enter" && onSearch && onSearch(e.target.value)
+        }
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />

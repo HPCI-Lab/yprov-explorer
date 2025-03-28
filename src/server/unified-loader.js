@@ -1,3 +1,10 @@
+/*
+unified-loader.js: This module provides a single function (‘unifiedFileLoader’) that loads JSON data from different sources,
+including local files, external URLs and API endpoints. Use a local proxy to avoid CORS issues
+and normalizes the data so that it always returns a consistent JSON object.
+*/
+
+
 import axios from 'axios';
 
 export const unifiedFileLoader = async (fileParam) => {
@@ -6,16 +13,11 @@ export const unifiedFileLoader = async (fileParam) => {
   try {
     // Determine if the input is a URL or API endpoint
     const isExternalUrl = fileParam.startsWith('http://') || fileParam.startsWith('https://');
-    const isApiEndpoint = fileParam.includes('yprov.vm.fedcloud.eu') || 
-                         fileParam.includes('/api/') ||
-                         fileParam.includes('/v0/');
-
+    
     // Choose the appropriate URL based on the type
     let fetchUrl;
-    if (isApiEndpoint) {
-      fetchUrl = `http://localhost:3001/proxy?url=${encodeURIComponent(fileParam)}`;
-    } else if (isExternalUrl) {
-      // Per gli URL esterni, usa comunque il proxy per evitare problemi CORS
+    if (isExternalUrl) {
+      // Use the local proxy for ANY external URL
       fetchUrl = `http://localhost:3001/proxy?url=${encodeURIComponent(fileParam)}`;
     } else {
       fetchUrl = fileParam;

@@ -1,36 +1,47 @@
+/*
+NavigationButton.js: This component is responsible for rendering the navigation buttons. 
+It uses the window.navigation API to check if the user can go back or forward in the browser history. 
+If the API is not supported, it falls back to using the window.history API. The component listens for navigate events and popstate 
+events to update the navigation state accordingly. It also provides event handlers for the back and forward buttons to navigate 
+the user back and forward in the browser history.
+*/
+
 import React, { useState, useEffect } from "react";
 import "./navigationButton.css";
 import backIcon from "./Back Arrow.png";
 import nextIcon from "./Forward Arrow.png";
 
 const NavigationButtons = () => {
+  // State for tracking if the user can go back or forward
   const [canGoBack, setCanGoBack] = useState(false);
   const [canGoForward, setCanGoForward] = useState(false);
 
+  // Use effect to update the navigation state and add event listeners
   useEffect(() => {
+    // Function to update the navigation state based on window.navigation or window.history
     const updateNavigationState = () => {
+      // Check if window.navigation is supported
       if (typeof window !== "undefined" && "navigation" in window) {
-        // Se l'API `window.navigation` è supportata
         setCanGoBack(window.navigation.canGoBack);
         setCanGoForward(window.navigation.canGoForward);
       } else {
-        // Fallback per browser che non supportano window.navigation
+        // Fallback to using window.history
         setCanGoBack(window.history.length > 1);
         setCanGoForward(false);
       }
     };
 
-    // Aggiorna lo stato iniziale
+    // Initial update of navigation state
     updateNavigationState();
 
-    // Aggiunge un event listener SOLO SE window.navigation esiste
+    // Add event listeners for navigate and popstate events
     if (typeof window !== "undefined" && "navigation" in window) {
       window.addEventListener("navigate", updateNavigationState);
     }
     window.addEventListener("popstate", updateNavigationState);
 
     return () => {
-      // Rimuove gli event listener quando il componente si smonta
+      // Clean up event listeners on unmount
       if (typeof window !== "undefined" && "navigation" in window) {
         window.removeEventListener("navigate", updateNavigationState);
       }
@@ -38,12 +49,14 @@ const NavigationButtons = () => {
     };
   }, []);
 
+  // Event handler for the back button
   const handleBack = () => {
     if (typeof window !== "undefined") {
       window.history.back();
     }
   };
 
+  // Event handler for the forward button
   const handleNext = () => {
     if (typeof window !== "undefined") {
       window.history.forward();

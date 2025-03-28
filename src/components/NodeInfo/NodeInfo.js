@@ -1,10 +1,10 @@
 //NodeInfo.js
 /* 
-mostra informazioni dettagliate su un nodo selezionato in un grafo. Ogni sezione visualizza dati come gruppo, 
-ID, tipo e relazioni del nodo (es. "Used", "Generated", "wasDerivedFrom"), con collegamenti cliccabili per 
-navigare tra nodi correlati e aggiornare la vista del grafo. Include una barra di ricerca per trovare e 
-evidenziare il testo corrispondente all'interno delle informazioni mostrate nella label di NodeInfo. Le parole 
-cercate vengono evidenziate dinamicamente tramite la funzione highlightMatches. 
+NodeInfo.js: shows detailed information about a selected node in a graph. Each section displays data as a group, 
+Node ID, type and relationships (e.g. "Used", "Generated", "wasDerivedFrom"), with clickable links to 
+Navigate between related nodes and update the graph view. Includes a search bar to find and 
+Highlight the corresponding text within the information shown in the NodeInfo label. Words 
+searches are highlighted dynamically via the highlightMatches function. 
 */
 
 import React from "react";
@@ -13,43 +13,42 @@ import NavigationButton from "../NavigationButton/NavigationButton";
 import "./nodeInfo.css";
 import { highlightMatches } from "../SearchBar/SearchBar";
 
-
 /*
- - nodeInfo: oggetto contenente le informazioni del nodo selezionato
- - searchQuery: stringa di ricerca per evidenziare i match all'interno delle informazioni del nodo
- - onHighlightNode: funzione per evidenziare un nodo selezionato nel grafo
- - onSearch: funzione per aggiornare la query di ricerca
+ -nodeInfo: object containing information of the selected node
+ - searchQuery: search string to highlight matches within node information
+ - onHighlightNode: function to highlight a selected node in the graph
+ - onSearch: function to update the search query
 */
 const NodeInfo = ({ nodeInfo, searchQuery, onHighlightNode, onSearch }) => {
   return (
     <div id="nodeInfo">
       <h3>NODE INFORMATION</h3>
 
-      {/* Barra di ricerca per evidenziare testo nelle informazioni del nodo */}
+      {/* Search bar to find and highlight text within the node information */}
       <div className="node-info-search-container">
         <SearchBar onSearch={onSearch} />
       </div>
 
-      {/* Pulsanti di navigazione per spostarsi tra i nodi correlati */}
+      {/* Navigation button to return to the graph view */}
       <NavigationButton />
       <div id="searchResult"></div>
 
-      {/* Se le informazioni del nodo sono disponibili, le visualizza */}
+      {/* Node information displayed in sections */}
       {nodeInfo ? (
         <div>
-          {/* Gruppo del nodo */}
+          {/* Group of the node */}
           <div className="node-info-section">
             <strong className="node-info-title">Group:</strong>
             <span
               className="node-info-value"
-              // dangerouslySetInnerHTML permette l'inserimento diretto di HTML. trattato come HTML effettivo
+              // dangerouslySetInnerHTML allows direct insertion of HTML. treated as actual HTML
               dangerouslySetInnerHTML={{
                 __html: highlightMatches(nodeInfo.group, searchQuery),
               }}
             ></span>
           </div>
 
-          {/* ID del nodo */}
+          {/* ID of the node */}
           <div className="node-info-section">
             <strong className="node-info-title">ID:</strong>
             <span
@@ -60,7 +59,7 @@ const NodeInfo = ({ nodeInfo, searchQuery, onHighlightNode, onSearch }) => {
             ></span>
           </div>
 
-          {/* Tipo del nodo */}
+          {/* Type of the node */}
           <div className="node-info-section">
             <strong className="node-info-title">Type:</strong>
             <span
@@ -71,7 +70,7 @@ const NodeInfo = ({ nodeInfo, searchQuery, onHighlightNode, onSearch }) => {
             ></span>
           </div>
 
-          {/* Relazioni del nodo */}
+          {/* Relationships of the node */}
           <div className="node-info-section">
             <strong className="node-info-title">Used:</strong>
             <span className="node-info-value">
@@ -80,13 +79,13 @@ const NodeInfo = ({ nodeInfo, searchQuery, onHighlightNode, onSearch }) => {
                   <a
                     href="#"
                     onClick={(e) => {
-                      e.preventDefault(); // Evita il comportamento di default del link.
+                      e.preventDefault(); // Avoids the default behavior of the browser.
                       window.history.pushState(
                         { idNodo: link },
                         "",
                         `#${link}`
-                      ); // Aggiorna la cronologia.
-                      onHighlightNode(link); // Chiama la funzione onHighlightNode passando l'ID del nodo cliccato, per evidenziarlo graficamente nel grafo.
+                      );
+                      onHighlightNode(link); // Highlights the selected node in the graph.
                     }}
                     dangerouslySetInnerHTML={{
                       __html: highlightMatches(link, searchQuery),
@@ -236,7 +235,11 @@ const NodeInfo = ({ nodeInfo, searchQuery, onHighlightNode, onSearch }) => {
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      window.history.pushState({ idNodo: link }, "", `#${link}`);
+                      window.history.pushState(
+                        { idNodo: link },
+                        "",
+                        `#${link}`
+                      );
                       onHighlightNode(link);
                     }}
                     dangerouslySetInnerHTML={{
@@ -252,22 +255,28 @@ const NodeInfo = ({ nodeInfo, searchQuery, onHighlightNode, onSearch }) => {
           <div className="node-info-section">
             <strong className="node-info-title">wasAssociatedWith:</strong>
             <span className="node-info-value">
-              {(nodeInfo.wasAssociatedWith || "None").split(", ").map((link) => (
-                <div key={link}>
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.history.pushState({ idNodo: link }, "", `#${link}`);
-                      onHighlightNode(link);
-                    }}
-                    dangerouslySetInnerHTML={{
-                      __html: highlightMatches(link, searchQuery),
-                    }}
-                    className="node-info-link"
-                  ></a>
-                </div>
-              ))}
+              {(nodeInfo.wasAssociatedWith || "None")
+                .split(", ")
+                .map((link) => (
+                  <div key={link}>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.history.pushState(
+                          { idNodo: link },
+                          "",
+                          `#${link}`
+                        );
+                        onHighlightNode(link);
+                      }}
+                      dangerouslySetInnerHTML={{
+                        __html: highlightMatches(link, searchQuery),
+                      }}
+                      className="node-info-link"
+                    ></a>
+                  </div>
+                ))}
             </span>
           </div>
 
@@ -280,7 +289,11 @@ const NodeInfo = ({ nodeInfo, searchQuery, onHighlightNode, onSearch }) => {
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      window.history.pushState({ idNodo: link }, "", `#${link}`);
+                      window.history.pushState(
+                        { idNodo: link },
+                        "",
+                        `#${link}`
+                      );
                       onHighlightNode(link);
                     }}
                     dangerouslySetInnerHTML={{
@@ -302,7 +315,11 @@ const NodeInfo = ({ nodeInfo, searchQuery, onHighlightNode, onSearch }) => {
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      window.history.pushState({ idNodo: link }, "", `#${link}`);
+                      window.history.pushState(
+                        { idNodo: link },
+                        "",
+                        `#${link}`
+                      );
                       onHighlightNode(link);
                     }}
                     dangerouslySetInnerHTML={{
@@ -314,7 +331,6 @@ const NodeInfo = ({ nodeInfo, searchQuery, onHighlightNode, onSearch }) => {
               ))}
             </span>
           </div>
-
         </div>
       ) : (
         <p id="infoContent">Click on a node to see details.</p>

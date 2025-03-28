@@ -3,64 +3,59 @@
   padding: 20px;
   background: linear-gradient(to bottom, #ffffff, #f0f0f0);
   border: 1px solid #ddd;
-  border-radius: 20px; /* Arrotondare gli angoli */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Effetto ombra */
-  font-family: Arial, sans-serif; /* Font moderno */
-  width: 400px; /* Larghezza fissa */
-  height: 800px; /* Altezza fissa */
-  overflow-y: auto; /* Aggiungi lo scroll verticale per contenuti più lunghi */
-  display: flex; /* Usa layout flessibile */
-  flex-direction: column; /* Dispone gli elementi in colonna */
-  gap: 15px; /* Aggiunge spaziatura tra gli elementi */
-  box-sizing: border-box; /* Include padding e bordi nella larghezza/altezza */
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  width: 400px;
+  height: 800px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-sizing: border-box;
 }
 
-/* Personalizzazione della scrollbar verticale */
 #nodeInfo::-webkit-scrollbar {
-  width: 8px; /* Larghezza della scrollbar verticale */
+  width: 8px;
 }
 
 #nodeInfo::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Sfondo della traccia */
-  border-radius: 20px; /* Arrotonda i bordi della traccia */
+  background: #f1f1f1;
+  border-radius: 20px;
 }
 
 #nodeInfo::-webkit-scrollbar-thumb {
-  background: #cccccc; /* Colore del thumb */
-  border-radius: 20px; /* Arrotonda i bordi del thumb */
+  background: #cccccc;
+  border-radius: 20px;
 }
 
 #nodeInfo::-webkit-scrollbar-thumb:hover {
-  background: #aaaaaa; /* Colore del thumb quando si passa il mouse */
+  background: #aaaaaa;
 }
 
-/* Stile per il titolo */
 #nodeInfo h3 {
   font-size: 1.5em;
   color: #333;
   margin-bottom: 15px;
-  flex-shrink: 0; /* Impedisce il ridimensionamento del titolo */
+  flex-shrink: 0;
 }
 
-/* Barra di ricerca */
 .search {
-  flex-shrink: 0; /* Impedisce alla barra di ricerca di spostarsi */
+  flex-shrink: 0;
 }
 
-/* Contenitore delle informazioni */
 #infoContent {
-  flex-grow: 1; /* Permette al contenitore delle informazioni di crescere */
-  overflow-y: auto; /* Aggiungi uno scroll interno solo al contenuto se necessario */
+  flex-grow: 1;
+  overflow-y: auto;
   font-size: 0.9em;
   color: #555;
   margin-top: 10px;
 }
 
-/* Stile per le sezioni delle informazioni */
 .node-info-section {
   margin-bottom: 12px;
   padding: 10px;
-  border: 1px solid #ddd; /* Solid border between sections */
+  border: 1px solid #ddd;
   border-radius: 20px;
   background-color: #ffffff;
 }
@@ -73,54 +68,51 @@
 .node-info-value {
   color: #555;
   margin-left: 5px;
-  max-width: 100%; /* Mantiene il testo all'interno del contenitore */
-  white-space: nowrap; /* Impedisce il wrapping del testo */
-  overflow-x: auto; /* Aggiunge una barra di scorrimento orizzontale */
-  display: block; /* Garantisce il comportamento di blocco */
+  max-width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+  display: block;
   padding-bottom: 8px;
   padding-top: 4px;
 
 }
 
-/* Personalizzazione della scrollbar */
 .node-info-value::-webkit-scrollbar {
-  height: 6px; /* Altezza della scrollbar */
+  height: 6px;
 }
 
 .node-info-value::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Sfondo della traccia */
+  background: #f1f1f1;
   border-radius: 20px;
 }
 
 .node-info-value::-webkit-scrollbar-thumb {
-  background: #cccccc; /* Colore del thumb */
+  background: #cccccc;
   border-radius: 20px;
 }
 
 .node-info-value::-webkit-scrollbar-thumb:hover {
-  background: #aaaaaa; /* Colore del thumb quando si passa il mouse */
+  background: #aaaaaa;
 }
 
 .node-info-section:hover {
-  background-color: #f1f1f1; /* Highlight on hover */
+  background-color: #f1f1f1;
 }
 
-  /* Stile per il testo evidenziato */
-  mark {
-    background-color:rgb(252, 252, 185);
-    color: #000;
-    font-weight: bold;    
-  }
+mark {
+  background-color: rgb(252, 252, 185);
+  color: #000;
+  font-weight: bold;
+}
 
-/* Contenitore specifico per la barra di ricerca */
 .node-info-search-container {
-  flex-shrink: 0; /* Impedisce il ridimensionamento */
-  margin-bottom: 10px; /* Spaziatura inferiore */
+  flex-shrink: 0;
+  margin-bottom: 10px;
 }
 
 .node-info-search-container .search-bar {
-  width: 100%; /* Garantisce che la barra di ricerca occupi l'intero contenitore */
-  height: auto; /* Evita conflitti di altezza */
+  width: 100%;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
