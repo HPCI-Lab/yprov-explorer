@@ -14,11 +14,19 @@ RUN npm run build
 
 # Stage 2: Server Nginx per servire l'applicazione
 FROM nginx:alpine
+
 # Copia la build generata nel folder di default di Nginx
 COPY --from=builder /app/build /usr/share/nginx/html
 
+# Copia il certificato SSL e la chiave privata
+COPY ./certs/explorer.yprov.disi.unitn.it.crt /etc/ssl/certs/certificate.crt
+COPY ./certs/explorer.yprov.disi.unitn.it.key /etc/ssl/private/private.key
+
+# Copia il file di configurazione personalizzato di Nginx
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+
 # Espone la porta 80 (la porta di default di Nginx)
-EXPOSE 80
+EXPOSE 80 443
 
 # Avvia Nginx in modalità foreground
 CMD ["nginx", "-g", "daemon off;"]
