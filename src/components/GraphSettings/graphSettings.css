@@ -13,6 +13,7 @@
 .settings-icon {
   width: 60px;
   height: 60px;
+  filter: invert(1); /* Inverte i colori dell'immagine */
 }
 
 .settings-label {
