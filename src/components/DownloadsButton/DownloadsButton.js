@@ -42,7 +42,7 @@ const DownloadsButton = ({
           canvas.width = svgElement.clientWidth; // Set the canvas width to the SVG width
           canvas.height = svgElement.clientHeight; // Set the canvas height to the SVG height
 
-          ctx.fillStyle = "#181424"; // Set the background color
+          ctx.fillStyle = "#f9f9f9"; // Set the background color
           ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill the canvas with the background color
 
           // Draw the SVG image on the canvas
@@ -80,7 +80,7 @@ const DownloadsButton = ({
         );
         rect.setAttribute("width", "100%"); // Set the width to 100%
         rect.setAttribute("height", "100%"); // Set the height to 100%
-        rect.setAttribute("fill", "#181424"); // Set the background color
+        rect.setAttribute("fill", "#f9f9f9"); // Set the background color
 
         // Insert the white background rectangle at the beginning of the SVG element
         svgElement.insertBefore(rect, svgElement.firstChild);

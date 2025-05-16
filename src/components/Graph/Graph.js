@@ -347,14 +347,15 @@ const Graph = ({
         .attr("class", "node-label")
         .attr("font-size", 15)
         .attr("dy", -5)
-        .attr("fill", "#fff")
+        .attr("fill", "#000")
+        .attr("text-shadow", "1px 1px 2px white")
         .attr("text-anchor", "middle")
         .text((d) => {
           const id = d.id;
           if (id.length <= 10) return id; // Show full ID if it's short
-          return `${id.slice(0, 5)}...${id.slice(-5)}`; // Show a truncated ID if it's long
+          return `${id.slice(0, 10)}...${id.slice(-5)}`; // Show a truncated ID if it's long
         })
-        .style("display", "none");
+        // .style("display", "none");
 
       // Add labels to the links (initially hidden)
       const linkLabels = g
@@ -365,10 +366,11 @@ const Graph = ({
         .join("text")
         .attr("class", "link-label")
         .attr("font-size", 15)
-        .attr("fill", "#fff")
+        .attr("fill", "#000")
+        .attr("text-shadow", "1px 1px 2px white")
         .attr("text-anchor", "middle")
         .text((d) => d.type)
-        .style("display", "none");
+        // .style("display", "none");
 
       // Add the nodes to the graph with different shapes based on the group (entity, activity, agent)
       const node = g
@@ -590,6 +592,11 @@ const Graph = ({
           .attr("x", (d) => d.x)
           .attr("y", (d) => d.y - 15)
           .raise();
+
+        // This fix issue with labels over the elements 
+        g.select(".link-labels").raise();
+        g.select(".node-labels").raise();
+
       });
     };
 
@@ -687,7 +694,7 @@ const Graph = ({
         // Reset the style of all nodes (remove the border)
         d3.selectAll(".node").style("stroke", null).style("stroke-width", null);
         // Highlight the selected node (add a white border)
-        selectedNode.style("stroke", "white").style("stroke-width", 5);
+        selectedNode.style("stroke", "grey").style("stroke-width", 5);
 
         const nodeData = selectedNode.datum(); // Get the data for the selected node
         // Function to focus on the selected node in the graph
