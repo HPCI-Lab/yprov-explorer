@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:23-alpine
 WORKDIR /app
 
 # Copia i file di configurazione e installa le dipendenze
