@@ -18,7 +18,7 @@ export const unifiedFileLoader = async (fileParam) => {
     let fetchUrl;
     if (isExternalUrl) {
       // Use the local proxy for ANY external URL
-      fetchUrl = `http://localhost:3001/proxy?url=${encodeURIComponent(fileParam)}`;
+      fetchUrl = `./proxy?url=${encodeURIComponent(fileParam)}`;
     } else {
       fetchUrl = fileParam;
     }

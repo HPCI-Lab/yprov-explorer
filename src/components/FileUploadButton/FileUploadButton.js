@@ -119,7 +119,7 @@ const FileUploadButton = ({ onFileUpload }) => {
         ? currentApiInput
         : `https://${currentApiInput}`;
       console.log("Fetching from API URL:", fullApiUrl);
-      const proxyUrl = `http://localhost:3001/proxy?url=${encodeURIComponent(fullApiUrl)}`;
+      const proxyUrl = `./proxy?url=${encodeURIComponent(fullApiUrl)}`;
       console.log("Using proxy URL:", proxyUrl);
       const response = await fetch(proxyUrl, { headers: { Accept: "application/json" } });
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);

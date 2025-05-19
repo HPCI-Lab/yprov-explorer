@@ -16,6 +16,9 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Cache-Control', 'Pragma']
 }));
 
+// Serve static files from the build directory
+app.use(express.static('build'));
+
 app.get('/proxy', async (req, res) => {
     const url = req.query.url;
     if (!url) {
@@ -81,8 +84,10 @@ app.use((err, req, res, next) => {
     });
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Proxy server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
+    console.log(`App available at: http://localhost:${PORT}`);
+    console.log(`Proxy service available at: http://localhost:${PORT}/proxy`);
     console.log(`Health check available at: http://localhost:${PORT}/health`);
 });

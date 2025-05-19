@@ -8,10 +8,13 @@ RUN npm install
 # Copia tutto il codice sorgente
 COPY . .
 
+# Esegui la build in modalità produzione
+RUN npm run build
+
 # Espone la porta usata dal server proxy
-EXPOSE 3001
+EXPOSE 3000
 
 # Avvia il server proxy
-CMD ["node", "src/server/proxy-server.mjs"]
+CMD ["node", "src/server/server.mjs"]
 
 
