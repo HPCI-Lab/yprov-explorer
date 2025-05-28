@@ -239,13 +239,13 @@ const Graph = ({
          * },
          */
         ...Object.values(graphData.wasDerivedFrom || {}).map((rel) => ({
-          source: nodeMap.get(rel["prov:usedEntity"]),
-          target: nodeMap.get(rel["prov:generatedEntity"]),
+          source: nodeMap.get(rel["prov:generatedEntity"]),
+          target: nodeMap.get(rel["prov:usedEntity"]),
           type: "wasDerivedFrom",
         })),
         ...Object.values(graphData.wasDerivedFrom || {}).map((rel) => ({
-          source: nodeMap.get(rel["prov:activity"]),
-          target: nodeMap.get(rel["prov:generatedEntity"]),
+          source: nodeMap.get(rel["prov:generatedEntity"]),
+          target: nodeMap.get(rel["prov:activity"]),
           type: "wasGeneratedBy",
         })),
         ...Object.values(graphData.wasDerivedFrom || {}).map((rel) => ({
@@ -254,18 +254,18 @@ const Graph = ({
           type: "used",
         })),
         ...Object.values(graphData.wasGeneratedBy || {}).map((rel) => ({
-          source: nodeMap.get(rel["prov:activity"]),
-          target: nodeMap.get(rel["prov:entity"]),
+          source: nodeMap.get(rel["prov:entity"]),
+          target: nodeMap.get(rel["prov:activity"]),
           type: "wasGeneratedBy",
         })),
         ...Object.values(graphData.used || {}).map((rel) => ({
-          source: nodeMap.get(rel["prov:entity"]),
-          target: nodeMap.get(rel["prov:activity"]),
+          source: nodeMap.get(rel["prov:activity"]),
+          target: nodeMap.get(rel["prov:entity"]),
           type: "used",
         })),
         ...Object.values(graphData.wasInformedBy || {}).map((rel) => ({
-          source: nodeMap.get(rel["prov:informant"]),
-          target: nodeMap.get(rel["prov:informed"]),
+          source: nodeMap.get(rel["prov:informed"]),
+          target: nodeMap.get(rel["prov:informant"]),
           type: "wasInformedBy",
         })),
         ...Object.values(graphData.hadMember || {}).map((rel) => ({
@@ -274,8 +274,8 @@ const Graph = ({
           type: "hadMember",
         })),
         ...Object.values(graphData.wasStartedBy || {}).map((rel) => ({
-          source: nodeMap.get(rel["prov:trigger"]),
-          target: nodeMap.get(rel["prov:activity"]),
+          source: nodeMap.get(rel["prov:activity"]),
+          target: nodeMap.get(rel["prov:trigger"]),
           type: "wasStartedBy",
         })),
         ...Object.values(graphData.wasAssociatedWith || {}).map((rel) => ({
@@ -350,11 +350,7 @@ const Graph = ({
         .attr("fill", "#000")
         .attr("text-shadow", "1px 1px 2px white")
         .attr("text-anchor", "middle")
-        .text((d) => {
-          const id = d.id;
-          if (id.length <= 10) return id; // Show full ID if it's short
-          return `${id.slice(0, 10)}...${id.slice(-5)}`; // Show a truncated ID if it's long
-        })
+        .text( d => d.id.length <= 18 ? d.id : `${d.id.slice(0, 10)}...${d.id.slice(-5)}` ) // Truncate long IDs
         // .style("display", "none");
 
       // Add labels to the links (initially hidden)
@@ -440,84 +436,73 @@ const Graph = ({
               : graphData.activity[d.id]?.["prov:type"] || "Unknown";
 
           // Filter the links based on the selected node
-          const wasGeneratedByLinks = links.filter(
-            (link) => link.type === "wasGeneratedBy" && link.target?.id === d.id
-          );
-          const usedLinks = links.filter(
-            (link) => link.type === "used" && link.source?.id === d.id
-          );
-          const wasDerivedFromLinks = links.filter(
-            (link) => link.type === "wasDerivedFrom" && link.source?.id === d.id
-          );
-          const wasInformedByLinks = links.filter(
-            (link) => link.type === "wasInformedBy" && link.target?.id === d.id
-          );
-          const wasAssociatedWithLinks = links.filter(
-            (link) =>
-              link.type === "wasAssociatedWith" && link.target?.id === d.id
-          );
-          const wasStartedByLinks = links.filter(
-            (link) => link.type === "wasStartedBy" && link.target?.id === d.id
-          );
-          const hadMemberLinks = links.filter(
-            (link) =>
-              link.type === "hadMember" &&
-              (link.source?.id === d.id || link.target?.id === d.id)
-          );
-          const wasAttributedToLinks = links.filter(
-            (link) =>
-              link.type === "wasAttributedTo" &&
-              (link.source?.id === d.id || link.target?.id === d.id)
-          );
 
-          // Format the relationships for display
-          const generatedLinks = links.filter(
+          const wasGeneratedBy = links.filter(
             (link) => link.type === "wasGeneratedBy" && link.source?.id === d.id
-          );
-          const wasUsedByLinks = links.filter(
+          ).map(
+            (link) => link.target.id
+          ).join(", ") || "None";
+          
+          const used = links.filter(
+            (link) => link.type === "used" && link.source?.id === d.id
+          ).map(
+            (link) => link.target.id
+          ).join(", ") || "None";
+          
+          const wasDerivedFrom = links.filter(
+            (link) => link.type === "wasDerivedFrom" && link.source?.id === d.id
+          ).map(
+            (link) => link.target.id
+          ).join(", ") || "None";
+
+          const wasInformedBy = links.filter(
+            (link) => link.type === "wasInformedBy" && link.source?.id === d.id
+          ).map(
+            (link) => link.target.id
+          ).join(", ") || "None";
+
+          const wasAssociatedWith = links.filter(
+            (link) => link.type === "wasAssociatedWith" && link.source?.id === d.id
+          ).map(
+            (link) => link.target.id
+          ).join(", ") || "None";
+
+          const wasStartedBy = links.filter(
+            (link) => link.type === "wasStartedBy" && link.source?.id === d.id
+          ).map(
+            (link) => link.target.id
+          ).join(", ") || "None";
+          
+          const hadMember = links.filter(
+            (link) => link.type === "hadMember" && link.source?.id === d.id
+          ).map(
+            (link) => link.target.id
+          ).join(", ") || "None";
+
+          const wasAttributedTo = links.filter(
+            (link) => link.type === "wasAttributedTo" && link.source?.id === d.id
+          ).map(
+            (link) => link.target.id
+          ).join(", ") || "None";
+
+          // Inverse relationships links
+          const generated = links.filter(
+            (link) => link.type === "wasGeneratedBy" && link.target?.id === d.id
+          ).map(
+            (link) => link.source.id
+          ).join(", ") || "None";
+          
+          const wasUsedBy = links.filter(
             (link) => link.type === "used" && link.target?.id === d.id
-          );
-          const derivesLinks = links.filter(
+          ).map(
+            (link) => link.source.id
+          ).join(", ") || "None";
+          
+          const derives = links.filter(
             (link) => link.type === "wasDerivedFrom" && link.target?.id === d.id
-          );
-
-          // Format the relationship information for the selected node
-          const wasGeneratedBy =
-            wasGeneratedByLinks.map((link) => link.source.id).join(", ") ||
-            "None";
-          const used =
-            usedLinks.map((link) => link.target.id).join(", ") || "None";
-          const wasDerivedFrom =
-            wasDerivedFromLinks.map((link) => link.target.id).join(", ") ||
-            "None";
-          const wasInformedBy =
-            wasInformedByLinks.map((link) => link.source.id).join(", ") ||
-            "None";
-          const wasAssociatedWith =
-            wasAssociatedWithLinks.map((link) => link.source.id).join(", ") ||
-            "None";
-          const wasStartedBy =
-            wasStartedByLinks.map((link) => link.source.id).join(", ") ||
-            "None";
-          const hadMember =
-            hadMemberLinks
-              .map((link) =>
-                link.source.id === d.id ? link.target.id : link.source.id
-              )
-              .join(", ") || "None";
-          const wasAttributedTo =
-            wasAttributedToLinks
-              .map((link) =>
-                link.source.id === d.id ? link.target.id : link.source.id
-              )
-              .join(", ") || "None";
-
-          const generated =
-            generatedLinks.map((link) => link.target.id).join(", ") || "None";
-          const wasUsedBy =
-            wasUsedByLinks.map((link) => link.source.id).join(", ") || "None";
-          const derives =
-            derivesLinks.map((link) => link.source.id).join(", ") || "None";
+          ).map(
+            (link) => link.source.id
+          ).join(", ") || "None";
 
           // Call the node click callback function with the node information
           onNodeClick({
