@@ -11,8 +11,10 @@ COPY . .
 # Esegui la build in modalità produzione
 RUN npm run build
 
+ENV PORT=3001
+
 # Espone la porta usata dal server proxy
-EXPOSE 3000
+EXPOSE 3001
 
 # Avvia il server proxy
 CMD ["node", "src/server/server.mjs"]
