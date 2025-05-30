@@ -150,6 +150,7 @@ const Graph = ({
           "wasStartedBy",
           "wasAssociatedWith",
           "wasAttributedTo",
+          "plan",
         ])
         .join("marker")
         .attr("id", (d) => `arrow-${d}`)
@@ -178,6 +179,8 @@ const Graph = ({
             ? "#FF00FF"
             : d === "wasAttributedTo"
             ? "#FF4500"
+            : d === "plan"
+            ? "#1F1511"
             : "#AAFF00"
         );
 
@@ -283,6 +286,11 @@ const Graph = ({
           target: nodeMap.get(rel["prov:agent"]),
           type: "wasAssociatedWith",
         })),
+        ...Object.values(graphData.wasAssociatedWith || {}).map((rel) => ({
+          source: nodeMap.get(rel["prov:activity"]),
+          target: nodeMap.get(rel["prov:plan"]),
+          type: "plan",
+        })),
         ...Object.values(graphData.wasAttributedTo || {}).map((rel) => ({
           source: nodeMap.get(rel["prov:entity"]),
           target: nodeMap.get(rel["prov:agent"]),
@@ -329,6 +337,8 @@ const Graph = ({
             ? "#FF00FF"
             : d.type === "wasAttributedTo"
             ? "#FF4500"
+            : d.type === "plan"
+            ? "#1F1511"
             : "#AAFF00"
         )
         .attr("stroke-width", 2)
